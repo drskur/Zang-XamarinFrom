@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
@@ -30,9 +30,10 @@ namespace ZangForm
             }
         }
 
-        async void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        async void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new MangaContentPage(e.SelectedItem as MangaItem));
+			((ListView)sender).SelectedItem = null;
+			await Navigation.PushAsync(new MangaContentPage(e.Item as MangaItem));
         }
     }
 }

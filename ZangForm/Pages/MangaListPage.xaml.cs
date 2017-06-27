@@ -23,13 +23,14 @@ namespace ZangForm
 
 			if (mangaList.Count() == 0)
 			{
-			  await Manga.FetchMangaList();
+                await Manga.FetchMangaList();
 			}
 		}
 
-        async void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        async void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new MangaItemPage(e.SelectedItem as MangaList));
+            ((ListView)sender).SelectedItem = null;
+            await Navigation.PushAsync(new MangaItemPage(e.Item as MangaList));
         }
     }
 }
