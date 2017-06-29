@@ -5,9 +5,11 @@
     <CarouselPage.ItemTemplate>
         <DataTemplate>
             <ContentPage>
-                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <Image Source="{Binding ImageURL}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-                </StackLayout>
+                <Image Source="{Binding ImageURL}" Aspect="Fill" HorizontalOptions="Fill" VerticalOptions="Fill">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Handle_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
             </ContentPage>
         </DataTemplate>
     </CarouselPage.ItemTemplate>

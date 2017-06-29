@@ -7,8 +7,8 @@ namespace ZangForm
 {
     public partial class MangaContentPage : CarouselPage
     {
-        MangaItem mangaItem;
-        IQueryable<MangaContent> contents;
+        private MangaItem mangaItem { get; set; }
+        private IQueryable<MangaContent> contents { get; set; }
 
         public MangaContentPage(MangaItem item)
         {
@@ -17,8 +17,8 @@ namespace ZangForm
             this.mangaItem = item;
             this.contents = Manga.QueryMangaContent(this.mangaItem);
 
-            this.Title = this.mangaItem.Title;
-
+            this.BindingContext = this.mangaItem;
+            this.SetBinding(TitleProperty, "Title");
             this.ItemsSource = contents;
         }
 
@@ -30,6 +30,11 @@ namespace ZangForm
             {
                 await Manga.FetchMangaContents(this.mangaItem);    
             }
+        }
+
+        void Handle_Tapped(object sender, System.EventArgs e)
+        {
+            NavigationPage.SetHasNavigationBar(this, !NavigationPage.GetHasNavigationBar(this));
         }
     }
 }

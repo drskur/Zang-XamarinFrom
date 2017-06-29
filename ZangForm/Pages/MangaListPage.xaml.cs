@@ -7,7 +7,7 @@ namespace ZangForm
 {
     public partial class MangaListPage : ContentPage
     {
-        IQueryable<MangaList> mangaList;
+        private IQueryable<MangaList> mangaList { get; set; }
 
         public MangaListPage()
         {

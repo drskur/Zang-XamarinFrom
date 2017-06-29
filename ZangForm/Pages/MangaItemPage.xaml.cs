@@ -7,23 +7,25 @@ namespace ZangForm
 {
     public partial class MangaItemPage : ContentPage
     {
-        MangaList manga;
-        IQueryable<MangaItem> mangas;
+        private MangaList manga { get; set; }
+        private IQueryable<MangaItem> mangas { get; set; }
 
         public MangaItemPage(MangaList manga)
         {
-            InitializeComponent();
-
             this.manga = manga;
             this.mangas = Manga.QueryMangaItem(manga);
-            this.listView.ItemsSource = this.mangas;
 
-            this.Title = manga.Title;
+            InitializeComponent();
+
+            this.BindingContext = this.manga;
+            this.SetBinding(TitleProperty, "Title");
+            this.listView.ItemsSource = this.mangas;
         }
 
         async protected override void OnAppearing()
         {
             base.OnAppearing();
+
             if (this.mangas.Count() == 0)
             {
                 await Manga.FetchMangaItem(this.manga);
